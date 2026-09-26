@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   HiOutlineMapPin,
   HiOutlineEnvelope,
@@ -13,7 +14,9 @@ import {
 import { toast } from 'sonner';
 import AuthSequence from '../components/auth/AuthSequence';
 import { useAuthSequence } from '../hooks/useAuthSequence';
+import { useAuth } from '../hooks/useAuth';
 import { site } from '../config/landing';
+
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -30,6 +33,10 @@ const MAP_STATS = [
 ];
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { signIn } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -38,15 +45,19 @@ const Login = () => {
   const [emailTouched, setEmailTouched] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
-  // Validée dérivée pendant le rendu, pas via un effet
+  // Validee derivee pendant le rendu, pas via un effet
   const emailValid = EMAIL_REGEX.test(email);
 
   const { active, current, start } = useAuthSequence(AUTH_STEPS, {
     onSuccess: () => {
+      signIn({ email });
+      setEmail('');
+      setPassword('');
+      setError('');
       toast.success('Connexion réussie', {
         description: `Bienvenue sur l'espace ${site.appName}.`,
       });
-      setPassword('');
+      navigate(location.state?.from ?? '/header-dashboard', { replace: true });
     },
   });
 
@@ -238,7 +249,7 @@ const Login = () => {
               </div>
 
               {/* Mot de passe */}
-              <div className="space-y-1.5 animate-fade-in-left" style={{ animationDelay: '120ms' }}>
+              <div className="space-y-1.5 animate-fade-in-left" style={{ animationDelay: '100ms' }}>
                 <div className="flex items-center justify-between">
                   <label
                     htmlFor="password"
