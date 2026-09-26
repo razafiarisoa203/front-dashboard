@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --color-brand-50: oklch(0.97 0.014 275);
-  --color-brand-500: oklch(0.55 0.2 275);
-  --color-brand-600: oklch(0.48 0.22 275);
-  --color-brand-700: oklch(0.42 0.21 275);
+  --color-brand-50: oklch(0.97 0.06 150);
+  --color-brand-500: oklch(0.58 0.18 150);
+  --color-brand-600: oklch(0.52 0.18 150);
+  --color-brand-700: oklch(0.43 0.16 150);
 }
 
 @layer base {
@@ -15,10 +17,15 @@
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  html.dark body {
+    @apply bg-slate-950 text-slate-100;
   }
 
   body {
-    @apply bg-slate-50 text-slate-900;
+    @apply bg-emerald-50 text-slate-900;
   }
 
   :focus-visible {
@@ -29,5 +36,76 @@
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out both;
+  }
+
+  .animate-fade-in-down {
+    animation: fade-in-down 0.25s ease-out both;
+  }
+
+  .animate-fade-in-left {
+    animation: fade-in-left 0.35s ease-out both;
+  }
+
+  .animate-rise {
+    animation: rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2.4s linear infinite;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
   }
 }
