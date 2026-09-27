@@ -9,11 +9,13 @@ import {
   LogOut,
   Map,
   ShieldCheck,
+  UserCog,
 } from 'lucide-react';
 
 const menuItems = [
   { label: 'Tableau de bord', icon: LayoutDashboard, to: '/header-dashboard' },
   { label: 'Utilisateurs', icon: Users, to: '/utilisateurs' },
+  { label: 'Rôles', icon: UserCog, to: '/roles' },
   { label: 'Permissions', icon: ShieldCheck, to: '/permissions' },
   { label: 'Cartographie', icon: Map, to: '/carte-admin' },
   { label: 'Rapports', icon: BarChart3, to: '/rapports' },

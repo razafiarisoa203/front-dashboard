@@ -15,6 +15,9 @@ import Sidebaradmin from './roles/admin/Sidebaradmin';
 import HeaderDashboard from './roles/admin/HeaderDashboard';
 import Carteadmin from './roles/admin/Carteadmin';
 import Profile from './roles/admin/Profile';
+import Utilisateur from './roles/admin/Utilisateur';
+import Permission from './roles/admin/Permission';
+import UtilisateurPartie from './roles/utilisateur/Utilisateur';
 
 const AdminSectionPage = ({ title, description }) => (
   <div className="flex min-h-screen bg-slate-100 text-slate-800">
@@ -63,11 +66,10 @@ function App() {
           <Route path="/header-dashboard" element={<HeaderDashboard />} />
           <Route path="/carte-admin" element={<Carteadmin />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/utilisateur" element={<UtilisateurPartie />} />
 
-          <Route
-            path="/utilisateurs"
-            element={<AdminSectionPage title="Utilisateurs" description="Gestion des comptes, des rôles et des accès." />}
-          />
+          <Route path="/utilisateurs" element={<Utilisateur />} />
+          <Route path="/permissions" element={<Permission />} />
           <Route
             path="/cartographie"
             element={<AdminSectionPage title="Cartographie" description="Suivi du territoire, couches SIG et données géospatiales." />}
